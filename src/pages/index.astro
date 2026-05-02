@@ -26,11 +26,10 @@ const prevMonth = currentMonth === 1 ? 12 : currentMonth - 1;
 const prevYM = `${prevYear}-${String(prevMonth).padStart(2, "0")}`;
 const prevMonthRuns = allRuns.filter((r) => r.data.date.startsWith(prevYM));
 
-function formatDate(d: string): string {
+function formatDay(d: string): string {
   return new Date(d + "T00:00:00").toLocaleDateString("en-GB", {
-    day: "numeric",
+    day: "2-digit",
     month: "short",
-    year: "numeric",
   });
 }
 
@@ -67,15 +66,34 @@ const prevGridActivities = prevMonthRuns.map((r) => ({
   {latestRun && (
     <section class="section">
       <p class="label">Latest run</p>
-      <p class="latest-run">
-        <span class="metric">{latestRun.data.distance_km.toFixed(1)} km</span>
-        {" · "}
-        <span class="metric">{latestRun.data.pace_per_km}/km</span>
-        {latestRun.data.city && ` · ${latestRun.data.city}`}
-        {" · "}
-        <a href={`${base}/runs/${latestRun.id}`}>{latestRun.data.title}</a>
-        <span class="date"> — {formatDate(latestRun.data.date)}</span>
-      </p>
+      <a href={`${base}/runs/${latestRun.id}`} class="run-entry">
+        <div class="run-top">
+          <span class="run-title">{latestRun.data.title}</span>
+          <span class="run-date">{formatDay(latestRun.data.date)}</span>
+        </div>
+        <div class="run-stats">
+          <span>
+            <span class="stat-label">Dist</span>
+            <span class="metric">{latestRun.data.distance_km.toFixed(1)} km</span>
+          </span>
+          <span>
+            <span class="stat-label">Pace</span>
+            <span class="metric">{latestRun.data.pace_per_km}/km</span>
+          </span>
+          {latestRun.data.avg_hr && (
+            <span>
+              <span class="stat-label">HR</span>
+              <span class="metric">{latestRun.data.avg_hr} bpm</span>
+            </span>
+          )}
+          {latestRun.data.city && (
+            <span>
+              <span class="stat-label">City</span>
+              <span class="metric">{latestRun.data.city}</span>
+            </span>
+          )}
+        </div>
+      </a>
     </section>
   )}
 
@@ -125,14 +143,6 @@ const prevGridActivities = prevMonthRuns.map((r) => ({
   .section .label {
     display: block;
     margin-bottom: 0.75rem;
-  }
-  .latest-run {
-    margin: 0;
-    font-size: 1rem;
-  }
-  .latest-run .date {
-    color: var(--muted);
-    font-size: 0.9rem;
   }
   .grid-gap {
     height: 1.5rem;
