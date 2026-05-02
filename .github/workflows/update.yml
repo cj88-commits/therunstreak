@@ -7,15 +7,10 @@ on:
 
 permissions:
   contents: write
-  pages: write
-  id-token: write
 
 jobs:
   update-and-deploy:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - name: Checkout
@@ -51,9 +46,6 @@ jobs:
       - name: Generate stats
         run: python scripts/generate_stats.py
 
-      - name: Build Astro site
-        run: npm run build
-
       - name: Commit updated content
         run: |
           git config user.name "github-actions[bot]"
@@ -65,12 +57,3 @@ jobs:
             git commit -m "Auto-import: $(date +'%Y-%m-%d')"
             git push
           fi
-
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: dist
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4

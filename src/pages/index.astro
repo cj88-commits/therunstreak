@@ -5,7 +5,6 @@ import MonthGrid from "../components/MonthGrid.astro";
 import { readFileSync } from "node:fs";
 import path from "node:path";
 
-const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const allRuns = await getCollection("runs");
 const allPosts = await getCollection("posts");
 
@@ -65,7 +64,7 @@ const prevGridActivities = prevMonthRuns.map((r) => ({
   {latestRun && (
     <section class="home-section">
       <p class="label">Latest run</p>
-      <a href={`${base}/runs/${latestRun.id}`} class="run-entry">
+      <a href={`/runs/${latestRun.id}`} class="run-entry">
         <div class="run-top">
           <span class="run-title">{latestRun.data.title}</span>
           <span class="run-date">{new Date(latestRun.data.date + "T00:00:00").toLocaleDateString("en-GB", { day: "2-digit", month: "short" })}</span>
@@ -127,7 +126,7 @@ const prevGridActivities = prevMonthRuns.map((r) => ({
       <ul class="post-list">
         {recentPosts.map((p) => (
           <li>
-            <a href={`${base}/posts/${p.id}`}>{p.data.title}</a>
+            <a href={`/posts/${p.id}`}>{p.data.title}</a>
           </li>
         ))}
       </ul>

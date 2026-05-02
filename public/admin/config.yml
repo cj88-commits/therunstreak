@@ -1,8 +1,6 @@
 backend:
-  name: github
-  repo: cj88-commits/therunstreak
+  name: git-gateway
   branch: main
-  base_url: https://famous-arithmetic-f8a8a2.netlify.app
 
 media_folder: public/images
 public_folder: /images

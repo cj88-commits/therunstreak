@@ -4,8 +4,7 @@ import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
-  site: "https://therunstreak.run",
-  base: "/therunstreak",
+  site: "https://therunstreak.netlify.app",
   integrations: [mdx(), sitemap()],
   output: "static",
 });

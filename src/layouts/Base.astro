@@ -6,7 +6,6 @@ interface Props {
   leafletCss?: boolean;
 }
 const { title, leafletCss = false } = Astro.props;
-const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 ---
 
 <!doctype html>
@@ -19,15 +18,16 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet" />
     {leafletCss && <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />}
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   </head>
   <body>
     <header>
       <div class="container header-inner">
-        <a href={`${base}/`} class="site-name">THE RUN STREAK</a>
+        <a href="/" class="site-name">THE RUN STREAK</a>
         <nav>
-          <a href={`${base}/runs`}>Runs</a>
-          <a href={`${base}/stats`}>Stats</a>
-          <a href={`${base}/posts`}>Posts</a>
+          <a href="/runs">Runs</a>
+          <a href="/stats">Stats</a>
+          <a href="/posts">Posts</a>
         </nav>
       </div>
     </header>
@@ -38,9 +38,20 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
     </main>
     <footer>
       <div class="container footer-inner">
-        therunstreak.run <a href={`${base}/admin/`} style="color: var(--muted); font-size: 0.75rem;">admin</a>
+        therunstreak.run <a href="/admin/" style="color: var(--muted); font-size: 0.75rem;">admin</a>
       </div>
     </footer>
+    <script>
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", user => {
+          if (!user) {
+            window.netlifyIdentity.on("login", () => {
+              document.location.href = "/admin/";
+            });
+          }
+        });
+      }
+    </script>
   </body>
 </html>
 
