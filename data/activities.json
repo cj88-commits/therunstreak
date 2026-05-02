@@ -36,17 +36,17 @@
   },
   {
     "date": "2026-04-27",
-    "slug": "2026-04-27-easy-run",
-    "distance_km": 6.2,
-    "garmin_id": "sample001",
-    "title": "Easy Run"
-  },
-  {
-    "date": "2026-04-27",
     "slug": "2026-04-27-tower-hamlets-running",
     "distance_km": 10.01,
     "garmin_id": "22676346714",
     "title": "Tower Hamlets Running"
+  },
+  {
+    "date": "2026-04-27",
+    "slug": "2026-04-27-easy-run",
+    "distance_km": 6.2,
+    "garmin_id": "sample001",
+    "title": "Easy Run"
   },
   {
     "date": "2026-04-26",
@@ -92,17 +92,17 @@
   },
   {
     "date": "2026-04-20",
-    "slug": "2026-04-20-long-run",
-    "distance_km": 14.1,
-    "garmin_id": "sample002",
-    "title": "Long Run"
-  },
-  {
-    "date": "2026-04-20",
     "slug": "2026-04-20-treadmill-running",
     "distance_km": 2.0,
     "garmin_id": "22593126650",
     "title": "Treadmill Running"
+  },
+  {
+    "date": "2026-04-20",
+    "slug": "2026-04-20-long-run",
+    "distance_km": 14.1,
+    "garmin_id": "sample002",
+    "title": "Long Run"
   },
   {
     "date": "2026-04-19",
@@ -148,17 +148,17 @@
   },
   {
     "date": "2026-04-13",
-    "slug": "2026-04-13-tempo",
-    "distance_km": 8.0,
-    "garmin_id": "sample003",
-    "title": "Tempo"
-  },
-  {
-    "date": "2026-04-13",
     "slug": "2026-04-13-treadmill-running",
     "distance_km": 2.0,
     "garmin_id": "22509711031",
     "title": "Treadmill Running"
+  },
+  {
+    "date": "2026-04-13",
+    "slug": "2026-04-13-tempo",
+    "distance_km": 8.0,
+    "garmin_id": "sample003",
+    "title": "Tempo"
   },
   {
     "date": "2026-04-12",
@@ -1576,16 +1576,16 @@
   },
   {
     "date": "2025-09-23",
-    "slug": "2025-09-23-treadmill-running-2",
-    "distance_km": 2.0,
-    "garmin_id": "20475061462",
+    "slug": "2025-09-23-treadmill-running",
+    "distance_km": 5.0,
+    "garmin_id": "20475308980",
     "title": "Treadmill Running"
   },
   {
     "date": "2025-09-23",
-    "slug": "2025-09-23-treadmill-running",
-    "distance_km": 5.0,
-    "garmin_id": "20475308980",
+    "slug": "2025-09-23-treadmill-running-2",
+    "distance_km": 2.0,
+    "garmin_id": "20475061462",
     "title": "Treadmill Running"
   },
   {
@@ -1933,16 +1933,16 @@
   },
   {
     "date": "2025-08-05",
-    "slug": "2025-08-05-gotland-running-2",
-    "distance_km": 4.79,
-    "garmin_id": "19957306740",
+    "slug": "2025-08-05-gotland-running",
+    "distance_km": 2.01,
+    "garmin_id": "19962640201",
     "title": "Gotland Running"
   },
   {
     "date": "2025-08-05",
-    "slug": "2025-08-05-gotland-running",
-    "distance_km": 2.01,
-    "garmin_id": "19962640201",
+    "slug": "2025-08-05-gotland-running-2",
+    "distance_km": 4.79,
+    "garmin_id": "19957306740",
     "title": "Gotland Running"
   },
   {
@@ -3417,16 +3417,16 @@
   },
   {
     "date": "2025-01-08",
-    "slug": "2025-01-08-tower-hamlets-running-2",
-    "distance_km": 2.05,
-    "garmin_id": "17947476078",
+    "slug": "2025-01-08-tower-hamlets-running",
+    "distance_km": 1.21,
+    "garmin_id": "17947476395",
     "title": "Tower Hamlets Running"
   },
   {
     "date": "2025-01-08",
-    "slug": "2025-01-08-tower-hamlets-running",
-    "distance_km": 1.21,
-    "garmin_id": "17947476395",
+    "slug": "2025-01-08-tower-hamlets-running-2",
+    "distance_km": 2.05,
+    "garmin_id": "17947476078",
     "title": "Tower Hamlets Running"
   },
   {
@@ -3445,17 +3445,17 @@
   },
   {
     "date": "2025-01-06",
-    "slug": "2025-01-06-central-bedfordshire-running",
-    "distance_km": 1.71,
-    "garmin_id": "17931729744",
-    "title": "Central Bedfordshire Running"
-  },
-  {
-    "date": "2025-01-06",
     "slug": "2025-01-06-waltham-forest-running",
     "distance_km": 0.85,
     "garmin_id": "17932373425",
     "title": "Waltham Forest Running"
+  },
+  {
+    "date": "2025-01-06",
+    "slug": "2025-01-06-central-bedfordshire-running",
+    "distance_km": 1.71,
+    "garmin_id": "17931729744",
+    "title": "Central Bedfordshire Running"
   },
   {
     "date": "2025-01-05",
@@ -4383,17 +4383,17 @@
   },
   {
     "date": "2024-08-26",
-    "slug": "2024-08-26-haringey-running",
-    "distance_km": 1.45,
-    "garmin_id": "16864981364",
-    "title": "Haringey Running"
-  },
-  {
-    "date": "2024-08-26",
     "slug": "2024-08-26-waltham-forest-running",
     "distance_km": 1.61,
     "garmin_id": "16864842957",
     "title": "Waltham Forest Running"
+  },
+  {
+    "date": "2024-08-26",
+    "slug": "2024-08-26-haringey-running",
+    "distance_km": 1.45,
+    "garmin_id": "16864981364",
+    "title": "Haringey Running"
   },
   {
     "date": "2024-08-25",
@@ -4467,16 +4467,16 @@
   },
   {
     "date": "2024-08-15",
-    "slug": "2024-08-15-waltham-forest-running-2",
-    "distance_km": 2.01,
-    "garmin_id": "16771489686",
+    "slug": "2024-08-15-waltham-forest-running",
+    "distance_km": 0.62,
+    "garmin_id": "16771783388",
     "title": "Waltham Forest Running"
   },
   {
     "date": "2024-08-15",
-    "slug": "2024-08-15-waltham-forest-running",
-    "distance_km": 0.62,
-    "garmin_id": "16771783388",
+    "slug": "2024-08-15-waltham-forest-running-2",
+    "distance_km": 2.01,
+    "garmin_id": "16771489686",
     "title": "Waltham Forest Running"
   },
   {
@@ -4600,13 +4600,6 @@
   },
   {
     "date": "2024-07-29",
-    "slug": "2024-07-29-gotland-running-2",
-    "distance_km": 2.89,
-    "garmin_id": "16617814027",
-    "title": "Gotland Running"
-  },
-  {
-    "date": "2024-07-29",
     "slug": "2024-07-29-gotland-running-3",
     "distance_km": 23.54,
     "garmin_id": "16617677999",
@@ -4620,10 +4613,10 @@
     "title": "Gotland Running"
   },
   {
-    "date": "2024-07-28",
-    "slug": "2024-07-28-gotland-running-2",
-    "distance_km": 1.63,
-    "garmin_id": "16613215000",
+    "date": "2024-07-29",
+    "slug": "2024-07-29-gotland-running-2",
+    "distance_km": 2.89,
+    "garmin_id": "16617814027",
     "title": "Gotland Running"
   },
   {
@@ -4631,6 +4624,13 @@
     "slug": "2024-07-28-gotland-running",
     "distance_km": 1.47,
     "garmin_id": "16613355184",
+    "title": "Gotland Running"
+  },
+  {
+    "date": "2024-07-28",
+    "slug": "2024-07-28-gotland-running-2",
+    "distance_km": 1.63,
+    "garmin_id": "16613215000",
     "title": "Gotland Running"
   },
   {
