@@ -7,35 +7,47 @@ interface Stats {
   total_runs: number;
   total_km: number;
   longest_run_km: number;
+  avg_pace: string | null;
   pb_5k: string | null;
   pb_10k: string | null;
   pb_half: string | null;
   countries: string[];
+  cities: string[];
+  current_streak: number;
+  longest_streak: number;
   last_updated: string | null;
 }
 
 interface MonthlySummary {
-  month: string;
+  year: number;
+  month: number;
+  month_label: string;
   runs: number;
-  km: number;
-  time: string;
+  distance_km: number;
+  duration_seconds: number;
+  duration_formatted: string;
 }
 
 const defaultStats: Stats = {
   total_runs: 0,
   total_km: 0,
   longest_run_km: 0,
+  avg_pace: null,
   pb_5k: null,
   pb_10k: null,
   pb_half: null,
   countries: [],
+  cities: [],
+  current_streak: 0,
+  longest_streak: 0,
   last_updated: null,
 };
 
 let stats = defaultStats;
 try {
   const raw = readFileSync(path.join(process.cwd(), "data", "stats.json"), "utf-8");
-  stats = JSON.parse(raw);
+  const parsed = JSON.parse(raw);
+  stats = { ...defaultStats, ...parsed };
 } catch {
   // use defaults
 }
@@ -43,7 +55,8 @@ try {
 let monthly: MonthlySummary[] = [];
 try {
   const raw = readFileSync(path.join(process.cwd(), "data", "monthly-summary.json"), "utf-8");
-  monthly = JSON.parse(raw);
+  const parsed = JSON.parse(raw);
+  monthly = Array.isArray(parsed) ? parsed : [];
 } catch {
   // no monthly data
 }
@@ -57,15 +70,35 @@ try {
     <div class="stats-grid">
       <div>
         <span class="label">Runs</span>
-        <span class="metric big">{stats.total_runs}</span>
+        <span class="metric big">{stats.total_runs ?? 0}</span>
       </div>
       <div>
         <span class="label">Distance</span>
-        <span class="metric big">{stats.total_km.toFixed(1)} km</span>
+        <span class="metric big">{(stats.total_km ?? 0).toFixed(1)} km</span>
       </div>
       <div>
         <span class="label">Longest run</span>
-        <span class="metric big">{stats.longest_run_km.toFixed(1)} km</span>
+        <span class="metric big">{(stats.longest_run_km ?? 0).toFixed(1)} km</span>
+      </div>
+      {stats.avg_pace && (
+        <div>
+          <span class="label">Avg pace</span>
+          <span class="metric big">{stats.avg_pace}/km</span>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <section class="section">
+    <p class="label">Streak</p>
+    <div class="stats-grid">
+      <div>
+        <span class="label">Current streak</span>
+        <span class="metric big">{stats.current_streak ?? 0} days</span>
+      </div>
+      <div>
+        <span class="label">Longest streak</span>
+        <span class="metric big">{stats.longest_streak ?? 0} days</span>
       </div>
     </div>
   </section>
@@ -88,10 +121,17 @@ try {
     </div>
   </section>
 
-  {stats.countries.length > 0 && (
+  {(stats.countries ?? []).length > 0 && (
     <section class="section">
       <p class="label">Countries</p>
       <p>{stats.countries.join(" · ")}</p>
+    </section>
+  )}
+
+  {(stats.cities ?? []).length > 0 && (
+    <section class="section">
+      <p class="label">Cities</p>
+      <p>{stats.cities.join(" · ")}</p>
     </section>
   )}
 
@@ -110,10 +150,10 @@ try {
         <tbody>
           {monthly.map((m) => (
             <tr>
-              <td>{m.month}</td>
-              <td class="metric">{m.runs}</td>
-              <td class="metric">{m.km.toFixed(1)}</td>
-              <td class="metric">{m.time}</td>
+              <td>{m.month_label ?? "—"}</td>
+              <td class="metric">{m.runs ?? 0}</td>
+              <td class="metric">{(m.distance_km ?? 0).toFixed(1)}</td>
+              <td class="metric">{m.duration_formatted ?? "—"}</td>
             </tr>
           ))}
         </tbody>

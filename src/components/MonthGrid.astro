@@ -18,9 +18,8 @@ today.setHours(0, 0, 0, 0);
 
 const daysInMonth = new Date(year, month, 0).getDate();
 
-// Day of week for first of month (0=Sun, adjusted to Mon=0)
 const firstDay = new Date(year, month - 1, 1).getDay();
-const startOffset = (firstDay === 0 ? 6 : firstDay - 1);
+const startOffset = firstDay === 0 ? 6 : firstDay - 1;
 
 const monthNames = [
   "January","February","March","April","May","June",
@@ -28,32 +27,51 @@ const monthNames = [
 ];
 const monthLabel = `${monthNames[month - 1].toUpperCase()} ${year}`;
 
-// Build activity map keyed by date string YYYY-MM-DD
-const activityMap = new Map<string, Activity>();
+// Sum distance per day (supports multiple runs on same day)
+const dayMap = new Map<string, { totalKm: number; slug: string }>();
 for (const a of activities) {
-  activityMap.set(a.date, a);
+  const existing = dayMap.get(a.date);
+  if (existing) {
+    existing.totalKm += a.distance_km;
+  } else {
+    dayMap.set(a.date, { totalKm: a.distance_km, slug: a.slug });
+  }
+}
+
+function shadeForKm(km: number): string {
+  if (km >= 18.0) return "#000000";
+  if (km >= 12.0) return "#262626";
+  if (km >= 8.0)  return "#525252";
+  if (km >= 5.0)  return "#a3a3a3";
+  return "#d4d4d4";
 }
 
 interface Cell {
   day: number | null;
   dateStr: string | null;
-  activity: Activity | null;
+  totalKm: number;
+  slug: string | null;
   isFuture: boolean;
 }
 
 const cells: Cell[] = [];
 
-// Leading empty cells
 for (let i = 0; i < startOffset; i++) {
-  cells.push({ day: null, dateStr: null, activity: null, isFuture: false });
+  cells.push({ day: null, dateStr: null, totalKm: 0, slug: null, isFuture: false });
 }
 
 for (let d = 1; d <= daysInMonth; d++) {
   const dateStr = `${year}-${String(month).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
   const cellDate = new Date(year, month - 1, d);
   const isFuture = cellDate > today;
-  const activity = activityMap.get(dateStr) ?? null;
-  cells.push({ day: d, dateStr, activity, isFuture });
+  const data = dayMap.get(dateStr);
+  cells.push({
+    day: d,
+    dateStr,
+    totalKm: data?.totalKm ?? 0,
+    slug: data?.slug ?? null,
+    isFuture,
+  });
 }
 
 const totalRuns = activities.length;
@@ -72,21 +90,20 @@ const totalKm = activities.reduce((s, a) => s + a.distance_km, 0);
       if (cell.day === null) {
         return <div class="cell empty" />;
       }
-      if (cell.activity) {
-        const a = cell.activity;
+      if (cell.isFuture) {
+        return <div class="cell future" title={cell.dateStr ?? ""} />;
+      }
+      if (cell.totalKm > 0 && cell.slug) {
+        const shade = shadeForKm(cell.totalKm);
         const shortDate = `${String(cell.day).padStart(2, "0")} ${monthNames[month - 1].slice(0, 3)}`;
         return (
           <a
-            href={`/runs/${a.slug}`}
+            href={`/runs/${cell.slug}`}
             class="cell run"
-            title={`${shortDate} · ${a.distance_km.toFixed(1)} km`}
-          >
-            <span class="sr-only">{cell.dateStr}</span>
-          </a>
+            style={`background:${shade}`}
+            title={`${shortDate} · ${cell.totalKm.toFixed(1)} km`}
+          />
         );
-      }
-      if (cell.isFuture) {
-        return <div class="cell future" title={cell.dateStr ?? ""} />;
       }
       return <div class="cell no-run" title={cell.dateStr ?? ""} />;
     })}
@@ -126,24 +143,17 @@ const totalKm = activities.reduce((s, a) => s + a.distance_km, 0);
     background: transparent;
   }
   .cell.run {
-    background: var(--text);
+    /* background set via inline style */
   }
   .cell.no-run {
     border: 1px solid var(--line);
     background: transparent;
   }
   .cell.future {
-    background: var(--soft);
+    background: #f5f5f5;
+    border: 1px solid var(--line);
   }
   .summary {
     margin: 0.5rem 0 0;
-  }
-  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip: rect(0,0,0,0);
-    white-space: nowrap;
   }
 </style>

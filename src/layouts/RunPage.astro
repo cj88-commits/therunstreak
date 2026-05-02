@@ -8,9 +8,9 @@ interface Props {
   distance_km: number;
   duration_seconds: number;
   pace_per_km: string;
-  avg_hr?: number;
-  city?: string;
-  country?: string;
+  avg_hr?: number | null;
+  city?: string | null;
+  country?: string | null;
   has_route?: boolean;
 }
 
@@ -46,9 +46,11 @@ function formatDate(d: string): string {
 }
 
 const location = [city, country].filter(Boolean).join(", ");
+const showMap = has_route && !!garmin_id;
 ---
 
-<Base title={title}>
+<Base title={title} leafletCss={showMap}>
+
   <div class="run-header">
     <p class="label">{formatDate(date)}{location ? ` · ${location}` : ""}</p>
     <h1>{title}</h1>
@@ -75,22 +77,35 @@ const location = [city, country].filter(Boolean).join(", ");
     )}
   </div>
 
-  {has_route && garmin_id && (
-    <div id="route-map" style="width:100%;height:300px;border:1px solid var(--line);margin:2rem 0"></div>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  {showMap && (
+    <div id="route-map"></div>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" is:inline></script>
     <script define:vars={{ garmin_id }}>
-      import("https://unpkg.com/leaflet@1.9.4/dist/leaflet-src.esm.js").then(({ default: L }) => {
-        const map = L.map("route-map");
-        L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
-          attribution: "&copy; OpenStreetMap contributors &copy; CARTO",
-          maxZoom: 19,
-        }).addTo(map);
-        fetch(`/routes/${garmin_id}.json`)
-          .then((r) => r.json())
-          .then((coords) => {
-            const line = L.polyline(coords, { color: "#111111", weight: 2 });
+      window.addEventListener("load", function () {
+        var mapEl = document.getElementById("route-map");
+        if (!mapEl) return;
+
+        fetch("/routes/" + garmin_id + ".json")
+          .then(function (r) { return r.json(); })
+          .then(function (coords) {
+            if (!coords || coords.length === 0) {
+              mapEl.style.display = "none";
+              return;
+            }
+            var map = L.map("route-map");
+            L.tileLayer(
+              "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+              {
+                attribution: "&copy; OpenStreetMap contributors &copy; CARTO",
+                maxZoom: 19,
+              }
+            ).addTo(map);
+            var line = L.polyline(coords, { color: "#111111", weight: 2, opacity: 1 });
             line.addTo(map);
             map.fitBounds(line.getBounds(), { padding: [20, 20] });
+          })
+          .catch(function () {
+            mapEl.style.display = "none";
           });
       });
     </script>
@@ -126,6 +141,12 @@ const location = [city, country].filter(Boolean).join(", ");
   }
   .stat .metric {
     font-size: 1.1rem;
+  }
+  #route-map {
+    width: 100%;
+    height: 300px;
+    border: 1px solid var(--line);
+    margin: 2rem 0;
   }
   .run-body {
     max-width: 640px;

@@ -1,1 +1,218 @@
-[]
+[
+  {
+    "year": 2026,
+    "month": 5,
+    "month_label": "May 2026",
+    "runs": 2,
+    "distance_km": 7.0,
+    "duration_seconds": 2558,
+    "duration_formatted": "42m"
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "month_label": "April 2026",
+    "runs": 33,
+    "distance_km": 130.9,
+    "duration_seconds": 48818,
+    "duration_formatted": "13h 33m"
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "month_label": "March 2026",
+    "runs": 31,
+    "distance_km": 117.4,
+    "duration_seconds": 44429,
+    "duration_formatted": "12h 20m"
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "month_label": "February 2026",
+    "runs": 28,
+    "distance_km": 111.1,
+    "duration_seconds": 41692,
+    "duration_formatted": "11h 34m"
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "month_label": "January 2026",
+    "runs": 31,
+    "distance_km": 114.6,
+    "duration_seconds": 41570,
+    "duration_formatted": "11h 32m"
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "month_label": "December 2025",
+    "runs": 32,
+    "distance_km": 129.5,
+    "duration_seconds": 47636,
+    "duration_formatted": "13h 13m"
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "month_label": "November 2025",
+    "runs": 30,
+    "distance_km": 178.6,
+    "duration_seconds": 67148,
+    "duration_formatted": "18h 39m"
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "month_label": "October 2025",
+    "runs": 31,
+    "distance_km": 100.3,
+    "duration_seconds": 37906,
+    "duration_formatted": "10h 31m"
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "month_label": "September 2025",
+    "runs": 31,
+    "distance_km": 137.8,
+    "duration_seconds": 52573,
+    "duration_formatted": "14h 36m"
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "month_label": "August 2025",
+    "runs": 33,
+    "distance_km": 146.2,
+    "duration_seconds": 55699,
+    "duration_formatted": "15h 28m"
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "month_label": "July 2025",
+    "runs": 31,
+    "distance_km": 120.4,
+    "duration_seconds": 46179,
+    "duration_formatted": "12h 49m"
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "month_label": "June 2025",
+    "runs": 30,
+    "distance_km": 104.5,
+    "duration_seconds": 41217,
+    "duration_formatted": "11h 26m"
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "month_label": "May 2025",
+    "runs": 32,
+    "distance_km": 100.3,
+    "duration_seconds": 38649,
+    "duration_formatted": "10h 44m"
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "month_label": "April 2025",
+    "runs": 31,
+    "distance_km": 100.4,
+    "duration_seconds": 39573,
+    "duration_formatted": "10h 59m"
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "month_label": "March 2025",
+    "runs": 31,
+    "distance_km": 114.7,
+    "duration_seconds": 45411,
+    "duration_formatted": "12h 36m"
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "month_label": "February 2025",
+    "runs": 28,
+    "distance_km": 100.1,
+    "duration_seconds": 39858,
+    "duration_formatted": "11h 4m"
+  },
+  {
+    "year": 2025,
+    "month": 1,
+    "month_label": "January 2025",
+    "runs": 34,
+    "distance_km": 103.2,
+    "duration_seconds": 40260,
+    "duration_formatted": "11h 11m"
+  },
+  {
+    "year": 2024,
+    "month": 12,
+    "month_label": "December 2024",
+    "runs": 31,
+    "distance_km": 122.4,
+    "duration_seconds": 48786,
+    "duration_formatted": "13h 33m"
+  },
+  {
+    "year": 2024,
+    "month": 11,
+    "month_label": "November 2024",
+    "runs": 30,
+    "distance_km": 100.5,
+    "duration_seconds": 39663,
+    "duration_formatted": "11h 1m"
+  },
+  {
+    "year": 2024,
+    "month": 10,
+    "month_label": "October 2024",
+    "runs": 31,
+    "distance_km": 100.2,
+    "duration_seconds": 40216,
+    "duration_formatted": "11h 10m"
+  },
+  {
+    "year": 2024,
+    "month": 9,
+    "month_label": "September 2024",
+    "runs": 30,
+    "distance_km": 100.4,
+    "duration_seconds": 39633,
+    "duration_formatted": "11h 0m"
+  },
+  {
+    "year": 2024,
+    "month": 8,
+    "month_label": "August 2024",
+    "runs": 33,
+    "distance_km": 101.7,
+    "duration_seconds": 45561,
+    "duration_formatted": "12h 39m"
+  },
+  {
+    "year": 2024,
+    "month": 7,
+    "month_label": "July 2024",
+    "runs": 35,
+    "distance_km": 122.3,
+    "duration_seconds": 49835,
+    "duration_formatted": "13h 50m"
+  },
+  {
+    "year": 2024,
+    "month": 6,
+    "month_label": "June 2024",
+    "runs": 22,
+    "distance_km": 70.8,
+    "duration_seconds": 28418,
+    "duration_formatted": "7h 53m"
+  }
+]
