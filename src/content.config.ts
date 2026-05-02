@@ -5,7 +5,7 @@ const runs = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/runs" }),
   schema: z.object({
     title: z.string(),
-    date: z.string(),
+    date: z.coerce.string(),
     garmin_id: z.string().optional(),
     distance_km: z.number(),
     duration_seconds: z.number(),
@@ -23,7 +23,7 @@ const posts = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/posts" }),
   schema: z.object({
     title: z.string(),
-    date: z.string(),
+    date: z.coerce.string(),
     description: z.string().optional(),
     tags: z.array(z.string()).optional(),
   }),
