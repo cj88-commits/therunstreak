@@ -1,0 +1,49 @@
+backend:
+  name: github
+  repo: cj88-commits/therunstreak
+  branch: main
+  base_url: https://api.netlify.com
+  auth_endpoint: auth
+
+media_folder: public/images
+public_folder: /images
+
+collections:
+  - name: runs
+    label: Runs
+    label_singular: Run
+    folder: src/content/runs
+    extension: md
+    format: frontmatter
+    identifier_field: title
+    sortable_fields: [date, distance_km]
+    default_sortby: date
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Date, name: date, widget: string }
+      - { label: Garmin ID, name: garmin_id, widget: string, required: false }
+      - { label: Distance (km), name: distance_km, widget: number, value_type: float }
+      - { label: Duration (seconds), name: duration_seconds, widget: number }
+      - { label: Pace per km, name: pace_per_km, widget: string }
+      - { label: Avg HR, name: avg_hr, widget: number, required: false }
+      - { label: City, name: city, widget: string, required: false }
+      - { label: Country, name: country, widget: string, required: false }
+      - { label: Has Route, name: has_route, widget: boolean, default: false }
+      - { label: Auto Generated, name: auto_generated, widget: boolean, default: false }
+      - { label: Tags, name: tags, widget: list, required: false }
+      - { label: Notes, name: body, widget: markdown }
+
+  - name: posts
+    label: Posts
+    label_singular: Post
+    folder: src/content/posts
+    extension: md
+    format: frontmatter
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Date, name: date, widget: string }
+      - { label: Description, name: description, widget: string, required: false }
+      - { label: Tags, name: tags, widget: list, required: false }
+      - { label: Body, name: body, widget: markdown }
