@@ -56,6 +56,19 @@ const prevGridActivities = prevMonthRuns.map((r) => ({
 ---
 
 <Base title="Home">
+  <script slot="head" is:inline>
+    (function() {
+      var hash = window.location.hash;
+      if (hash && (
+        hash.indexOf('invite_token') > -1 ||
+        hash.indexOf('recovery_token') > -1 ||
+        hash.indexOf('confirmation_token') > -1
+      )) {
+        window.location.replace('/admin/' + hash);
+      }
+    })();
+  </script>
+
   <section class="home-section streak-hero">
     <p class="label">Current streak</p>
     <p class="streak-number">{stats.current_streak} <span class="streak-unit">days</span></p>
