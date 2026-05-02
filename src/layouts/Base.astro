@@ -51,6 +51,14 @@ const { title, leafletCss = false } = Astro.props;
           }
         });
       }
+
+      // Handle invite and recovery tokens
+      if (window.location.hash && window.location.hash.includes('invite_token')) {
+        window.netlifyIdentity && window.netlifyIdentity.open();
+      }
+      if (window.location.hash && window.location.hash.includes('recovery_token')) {
+        window.netlifyIdentity && window.netlifyIdentity.open();
+      }
     </script>
   </body>
 </html>
