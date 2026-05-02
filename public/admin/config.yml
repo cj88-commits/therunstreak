@@ -2,8 +2,7 @@ backend:
   name: github
   repo: cj88-commits/therunstreak
   branch: main
-  base_url: https://api.netlify.com
-  auth_endpoint: auth
+  base_url: https://famous-arithmetic-f8a8a2.netlify.app
 
 media_folder: public/images
 public_folder: /images
