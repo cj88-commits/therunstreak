@@ -6,6 +6,7 @@ interface Props {
   leafletCss?: boolean;
 }
 const { title, leafletCss = false } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 ---
 
 <!doctype html>
@@ -22,11 +23,11 @@ const { title, leafletCss = false } = Astro.props;
   <body>
     <header>
       <div class="container header-inner">
-        <a href="/" class="site-name">THE RUN STREAK</a>
+        <a href={`${base}/`} class="site-name">THE RUN STREAK</a>
         <nav>
-          <a href="/runs">Runs</a>
-          <a href="/stats">Stats</a>
-          <a href="/posts">Posts</a>
+          <a href={`${base}/runs`}>Runs</a>
+          <a href={`${base}/stats`}>Stats</a>
+          <a href={`${base}/posts`}>Posts</a>
         </nav>
       </div>
     </header>

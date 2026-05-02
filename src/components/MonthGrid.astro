@@ -12,6 +12,7 @@ interface Props {
 }
 
 const { year, month, activities } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 
 const today = new Date();
 today.setHours(0, 0, 0, 0);
@@ -98,7 +99,7 @@ const totalKm = activities.reduce((s, a) => s + a.distance_km, 0);
         const shortDate = `${String(cell.day).padStart(2, "0")} ${monthNames[month - 1].slice(0, 3)}`;
         return (
           <a
-            href={`/runs/${cell.slug}`}
+            href={`${base}/runs/${cell.slug}`}
             class="cell run"
             style={`background:${shade}`}
             title={`${shortDate} · ${cell.totalKm.toFixed(1)} km`}

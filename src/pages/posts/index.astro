@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import Base from "../../layouts/Base.astro";
 
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const allPosts = await getCollection("posts");
 allPosts.sort((a, b) => b.data.date.localeCompare(a.data.date));
 
@@ -21,7 +22,7 @@ function formatDate(d: string): string {
       <li class="post-row">
         <span class="date label">{formatDate(p.data.date)}</span>
         <span class="post-title">
-          <a href={`/posts/${p.id}`}>{p.data.title}</a>
+          <a href={`${base}/posts/${p.id}`}>{p.data.title}</a>
           {p.data.description && <span class="desc"> — {p.data.description}</span>}
         </span>
       </li>

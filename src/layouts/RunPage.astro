@@ -47,6 +47,7 @@ function formatDate(d: string): string {
 
 const location = [city, country].filter(Boolean).join(", ");
 const showMap = has_route && !!garmin_id;
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 ---
 
 <Base title={title} leafletCss={showMap}>
@@ -80,12 +81,12 @@ const showMap = has_route && !!garmin_id;
   {showMap && (
     <div id="route-map"></div>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" is:inline></script>
-    <script define:vars={{ garmin_id }}>
+    <script define:vars={{ garmin_id, base }}>
       window.addEventListener("load", function () {
         var mapEl = document.getElementById("route-map");
         if (!mapEl) return;
 
-        fetch("/routes/" + garmin_id + ".json")
+        fetch(base + "/routes/" + garmin_id + ".json")
           .then(function (r) { return r.json(); })
           .then(function (coords) {
             if (!coords || coords.length === 0) {
