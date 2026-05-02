@@ -1,0 +1,99 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+
+const allRuns = await getCollection("runs");
+allRuns.sort((a, b) => b.data.date.localeCompare(a.data.date));
+
+function formatDate(d: string): string {
+  return new Date(d + "T00:00:00").toLocaleDateString("en-GB", {
+    day: "2-digit",
+  });
+}
+
+function monthLabel(d: string): string {
+  const dt = new Date(d + "T00:00:00");
+  return dt.toLocaleDateString("en-GB", { month: "long", year: "numeric" }).toUpperCase();
+}
+
+// Group by month
+const groups = new Map<string, typeof allRuns>();
+for (const run of allRuns) {
+  const key = run.data.date.slice(0, 7);
+  if (!groups.has(key)) groups.set(key, []);
+  groups.get(key)!.push(run);
+}
+
+const sortedKeys = [...groups.keys()].sort((a, b) => b.localeCompare(a));
+---
+
+<Base title="Runs">
+  <h1>Runs</h1>
+  {sortedKeys.map((key) => {
+    const runs = groups.get(key)!;
+    const label = monthLabel(runs[0].data.date);
+    return (
+      <section class="month-section">
+        <p class="label">{label}</p>
+        <ul class="run-list">
+          {runs.map((r) => (
+            <li class="run-row">
+              <span class="metric day">{formatDate(r.data.date)}</span>
+              <span class="metric dist">{r.data.distance_km.toFixed(1)} km</span>
+              <span class="metric pace">{r.data.pace_per_km}/km</span>
+              {r.data.city && <span class="city">{r.data.city}</span>}
+              <a href={`/runs/${r.id}`}>{r.data.title}</a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    );
+  })}
+</Base>
+
+<style>
+  h1 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
+  }
+  .month-section {
+    margin-bottom: 2.5rem;
+  }
+  .month-section .label {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  .run-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .run-row {
+    display: flex;
+    gap: 1rem;
+    align-items: baseline;
+    padding: 0.4rem 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.9rem;
+    flex-wrap: wrap;
+  }
+  .run-row:first-child {
+    border-top: 1px solid var(--line);
+  }
+  .day {
+    color: var(--muted);
+    min-width: 1.5rem;
+  }
+  .dist {
+    min-width: 5rem;
+  }
+  .pace {
+    min-width: 5rem;
+    color: var(--muted);
+  }
+  .city {
+    color: var(--muted);
+    min-width: 5rem;
+  }
+</style>

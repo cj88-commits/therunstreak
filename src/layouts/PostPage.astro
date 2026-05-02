@@ -1,0 +1,56 @@
+---
+import Base from "./Base.astro";
+
+interface Props {
+  title: string;
+  date: string;
+  description?: string;
+}
+
+const { title, date, description } = Astro.props;
+
+function formatDate(d: string): string {
+  return new Date(d + "T00:00:00").toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+}
+---
+
+<Base title={title}>
+  <div class="post-header">
+    <p class="label">{formatDate(date)}</p>
+    <h1>{title}</h1>
+    {description && <p class="description">{description}</p>}
+  </div>
+  <div class="post-body">
+    <slot />
+  </div>
+</Base>
+
+<style>
+  .post-header {
+    margin-bottom: 2.5rem;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 1.5rem;
+  }
+  .post-header h1 {
+    margin: 0.25rem 0 0.5rem;
+    font-size: 1.75rem;
+    font-weight: 500;
+  }
+  .description {
+    color: var(--muted);
+    margin: 0;
+    font-size: 0.95rem;
+  }
+  .post-body {
+    max-width: 640px;
+  }
+  .post-body :global(h2),
+  .post-body :global(h3) {
+    font-weight: 500;
+    margin-top: 2rem;
+  }
+</style>

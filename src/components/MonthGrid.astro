@@ -1,0 +1,149 @@
+---
+interface Activity {
+  date: string;
+  distance_km: number;
+  slug: string;
+}
+
+interface Props {
+  year: number;
+  month: number;
+  activities: Activity[];
+}
+
+const { year, month, activities } = Astro.props;
+
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+
+const daysInMonth = new Date(year, month, 0).getDate();
+
+// Day of week for first of month (0=Sun, adjusted to Mon=0)
+const firstDay = new Date(year, month - 1, 1).getDay();
+const startOffset = (firstDay === 0 ? 6 : firstDay - 1);
+
+const monthNames = [
+  "January","February","March","April","May","June",
+  "July","August","September","October","November","December",
+];
+const monthLabel = `${monthNames[month - 1].toUpperCase()} ${year}`;
+
+// Build activity map keyed by date string YYYY-MM-DD
+const activityMap = new Map<string, Activity>();
+for (const a of activities) {
+  activityMap.set(a.date, a);
+}
+
+interface Cell {
+  day: number | null;
+  dateStr: string | null;
+  activity: Activity | null;
+  isFuture: boolean;
+}
+
+const cells: Cell[] = [];
+
+// Leading empty cells
+for (let i = 0; i < startOffset; i++) {
+  cells.push({ day: null, dateStr: null, activity: null, isFuture: false });
+}
+
+for (let d = 1; d <= daysInMonth; d++) {
+  const dateStr = `${year}-${String(month).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
+  const cellDate = new Date(year, month - 1, d);
+  const isFuture = cellDate > today;
+  const activity = activityMap.get(dateStr) ?? null;
+  cells.push({ day: d, dateStr, activity, isFuture });
+}
+
+const totalRuns = activities.length;
+const totalKm = activities.reduce((s, a) => s + a.distance_km, 0);
+---
+
+<div class="month-grid-wrapper">
+  <p class="label month-title">{monthLabel}</p>
+  <div class="day-headers">
+    {["Mo","Tu","We","Th","Fr","Sa","Su"].map((d) => (
+      <span class="day-header label">{d}</span>
+    ))}
+  </div>
+  <div class="grid">
+    {cells.map((cell) => {
+      if (cell.day === null) {
+        return <div class="cell empty" />;
+      }
+      if (cell.activity) {
+        const a = cell.activity;
+        const shortDate = `${String(cell.day).padStart(2, "0")} ${monthNames[month - 1].slice(0, 3)}`;
+        return (
+          <a
+            href={`/runs/${a.slug}`}
+            class="cell run"
+            title={`${shortDate} · ${a.distance_km.toFixed(1)} km`}
+          >
+            <span class="sr-only">{cell.dateStr}</span>
+          </a>
+        );
+      }
+      if (cell.isFuture) {
+        return <div class="cell future" title={cell.dateStr ?? ""} />;
+      }
+      return <div class="cell no-run" title={cell.dateStr ?? ""} />;
+    })}
+  </div>
+  <p class="label summary">{totalRuns} run{totalRuns !== 1 ? "s" : ""} · {totalKm.toFixed(1)} km</p>
+</div>
+
+<style>
+  .month-grid-wrapper {
+    display: inline-block;
+  }
+  .month-title {
+    margin: 0 0 0.5rem;
+  }
+  .day-headers {
+    display: grid;
+    grid-template-columns: repeat(7, 1.5rem);
+    gap: 3px;
+    margin-bottom: 3px;
+  }
+  .day-header {
+    width: 1.5rem;
+    text-align: center;
+    font-size: 0.6rem;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1.5rem);
+    gap: 3px;
+  }
+  .cell {
+    width: 1.5rem;
+    height: 1.5rem;
+    display: block;
+  }
+  .cell.empty {
+    background: transparent;
+  }
+  .cell.run {
+    background: var(--text);
+  }
+  .cell.no-run {
+    border: 1px solid var(--line);
+    background: transparent;
+  }
+  .cell.future {
+    background: var(--soft);
+  }
+  .summary {
+    margin: 0.5rem 0 0;
+  }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+  }
+</style>

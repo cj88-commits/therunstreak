@@ -1,0 +1,174 @@
+---
+import Base from "../layouts/Base.astro";
+import { readFileSync } from "node:fs";
+import path from "node:path";
+
+interface Stats {
+  total_runs: number;
+  total_km: number;
+  longest_run_km: number;
+  pb_5k: string | null;
+  pb_10k: string | null;
+  pb_half: string | null;
+  countries: string[];
+  last_updated: string | null;
+}
+
+interface MonthlySummary {
+  month: string;
+  runs: number;
+  km: number;
+  time: string;
+}
+
+const defaultStats: Stats = {
+  total_runs: 0,
+  total_km: 0,
+  longest_run_km: 0,
+  pb_5k: null,
+  pb_10k: null,
+  pb_half: null,
+  countries: [],
+  last_updated: null,
+};
+
+let stats = defaultStats;
+try {
+  const raw = readFileSync(path.join(process.cwd(), "data", "stats.json"), "utf-8");
+  stats = JSON.parse(raw);
+} catch {
+  // use defaults
+}
+
+let monthly: MonthlySummary[] = [];
+try {
+  const raw = readFileSync(path.join(process.cwd(), "data", "monthly-summary.json"), "utf-8");
+  monthly = JSON.parse(raw);
+} catch {
+  // no monthly data
+}
+---
+
+<Base title="Stats">
+  <h1>Stats</h1>
+
+  <section class="section">
+    <p class="label">Totals</p>
+    <div class="stats-grid">
+      <div>
+        <span class="label">Runs</span>
+        <span class="metric big">{stats.total_runs}</span>
+      </div>
+      <div>
+        <span class="label">Distance</span>
+        <span class="metric big">{stats.total_km.toFixed(1)} km</span>
+      </div>
+      <div>
+        <span class="label">Longest run</span>
+        <span class="metric big">{stats.longest_run_km.toFixed(1)} km</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <p class="label">Personal bests</p>
+    <div class="stats-grid">
+      <div>
+        <span class="label">5K</span>
+        <span class="metric big">{stats.pb_5k ?? "—"}</span>
+      </div>
+      <div>
+        <span class="label">10K</span>
+        <span class="metric big">{stats.pb_10k ?? "—"}</span>
+      </div>
+      <div>
+        <span class="label">Half marathon</span>
+        <span class="metric big">{stats.pb_half ?? "—"}</span>
+      </div>
+    </div>
+  </section>
+
+  {stats.countries.length > 0 && (
+    <section class="section">
+      <p class="label">Countries</p>
+      <p>{stats.countries.join(" · ")}</p>
+    </section>
+  )}
+
+  {monthly.length > 0 && (
+    <section class="section">
+      <p class="label">Monthly summary</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Month</th>
+            <th>Runs</th>
+            <th>Km</th>
+            <th>Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          {monthly.map((m) => (
+            <tr>
+              <td>{m.month}</td>
+              <td class="metric">{m.runs}</td>
+              <td class="metric">{m.km.toFixed(1)}</td>
+              <td class="metric">{m.time}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </section>
+  )}
+
+  {stats.last_updated && (
+    <p class="label">Updated {stats.last_updated}</p>
+  )}
+</Base>
+
+<style>
+  h1 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
+  }
+  .section {
+    margin-bottom: 3rem;
+  }
+  .section .label {
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+  .stats-grid {
+    display: flex;
+    gap: 3rem;
+    flex-wrap: wrap;
+  }
+  .stats-grid > div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+  .big {
+    font-size: 1.4rem;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+  th {
+    text-align: left;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 0.4rem 1rem 0.4rem 0;
+    border-bottom: 1px solid var(--line);
+    font-weight: 400;
+  }
+  td {
+    padding: 0.5rem 1rem 0.5rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+</style>

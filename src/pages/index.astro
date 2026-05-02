@@ -1,0 +1,159 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../layouts/Base.astro";
+import MonthGrid from "../components/MonthGrid.astro";
+import { readFileSync } from "node:fs";
+import path from "node:path";
+
+const allRuns = await getCollection("runs");
+const allPosts = await getCollection("posts");
+
+allRuns.sort((a, b) => b.data.date.localeCompare(a.data.date));
+allPosts.sort((a, b) => b.data.date.localeCompare(a.data.date));
+
+const latestRun = allRuns[0];
+
+const now = new Date();
+const currentYear = now.getFullYear();
+const currentMonth = now.getMonth() + 1;
+const currentYM = `${currentYear}-${String(currentMonth).padStart(2, "0")}`;
+
+const thisMonthRuns = allRuns.filter((r) => r.data.date.startsWith(currentYM));
+
+const prevYear = currentMonth === 1 ? currentYear - 1 : currentYear;
+const prevMonth = currentMonth === 1 ? 12 : currentMonth - 1;
+const prevYM = `${prevYear}-${String(prevMonth).padStart(2, "0")}`;
+const prevMonthRuns = allRuns.filter((r) => r.data.date.startsWith(prevYM));
+
+function formatDate(d: string): string {
+  return new Date(d + "T00:00:00").toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
+}
+
+let stats: { pb_5k: string | null; pb_10k: string | null; pb_half: string | null } = {
+  pb_5k: null,
+  pb_10k: null,
+  pb_half: null,
+};
+
+try {
+  const statsPath = path.join(process.cwd(), "data", "stats.json");
+  const raw = readFileSync(statsPath, "utf-8");
+  stats = JSON.parse(raw);
+} catch {
+  // file missing or invalid — use defaults
+}
+
+const recentPosts = allPosts.slice(0, 3);
+
+const gridActivities = thisMonthRuns.map((r) => ({
+  date: r.data.date,
+  distance_km: r.data.distance_km,
+  slug: r.id,
+}));
+
+const prevGridActivities = prevMonthRuns.map((r) => ({
+  date: r.data.date,
+  distance_km: r.data.distance_km,
+  slug: r.id,
+}));
+---
+
+<Base title="Home">
+  {latestRun && (
+    <section class="section">
+      <p class="label">Latest run</p>
+      <p class="latest-run">
+        <span class="metric">{latestRun.data.distance_km.toFixed(1)} km</span>
+        {" · "}
+        <span class="metric">{latestRun.data.pace_per_km}/km</span>
+        {latestRun.data.city && ` · ${latestRun.data.city}`}
+        {" · "}
+        <a href={`/runs/${latestRun.id}`}>{latestRun.data.title}</a>
+        <span class="date"> — {formatDate(latestRun.data.date)}</span>
+      </p>
+    </section>
+  )}
+
+  <section class="section">
+    <p class="label">Activity</p>
+    <MonthGrid year={currentYear} month={currentMonth} activities={gridActivities} />
+    <div class="grid-gap" />
+    <MonthGrid year={prevYear} month={prevMonth} activities={prevGridActivities} />
+  </section>
+
+  <section class="section">
+    <p class="label">Best efforts</p>
+    <div class="best-efforts">
+      <div>
+        <span class="label">5K</span>
+        <span class="metric">{stats.pb_5k ?? "—"}</span>
+      </div>
+      <div>
+        <span class="label">10K</span>
+        <span class="metric">{stats.pb_10k ?? "—"}</span>
+      </div>
+      <div>
+        <span class="label">Half marathon</span>
+        <span class="metric">{stats.pb_half ?? "—"}</span>
+      </div>
+    </div>
+  </section>
+
+  {recentPosts.length > 0 && (
+    <section class="section">
+      <p class="label">Recent notes</p>
+      <ul class="post-list">
+        {recentPosts.map((p) => (
+          <li>
+            <a href={`/posts/${p.id}`}>{p.data.title}</a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+</Base>
+
+<style>
+  .section {
+    margin-bottom: 3rem;
+  }
+  .section .label {
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+  .latest-run {
+    margin: 0;
+    font-size: 1rem;
+  }
+  .latest-run .date {
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  .grid-gap {
+    height: 1.5rem;
+  }
+  .best-efforts {
+    display: flex;
+    gap: 3rem;
+  }
+  .best-efforts > div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+  .best-efforts .metric {
+    font-size: 1.2rem;
+  }
+  .post-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+</style>

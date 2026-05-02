@@ -1,0 +1,30 @@
+---
+import { getCollection, render } from "astro:content";
+import RunPage from "../../layouts/RunPage.astro";
+
+export async function getStaticPaths() {
+  const runs = await getCollection("runs");
+  return runs.map((run) => ({
+    params: { slug: run.id },
+    props: { run },
+  }));
+}
+
+const { run } = Astro.props;
+const { Content } = await render(run);
+---
+
+<RunPage
+  title={run.data.title}
+  date={run.data.date}
+  garmin_id={run.data.garmin_id}
+  distance_km={run.data.distance_km}
+  duration_seconds={run.data.duration_seconds}
+  pace_per_km={run.data.pace_per_km}
+  avg_hr={run.data.avg_hr}
+  city={run.data.city}
+  country={run.data.country}
+  has_route={run.data.has_route}
+>
+  <Content />
+</RunPage>

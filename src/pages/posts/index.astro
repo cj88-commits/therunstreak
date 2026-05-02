@@ -1,0 +1,62 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+
+const allPosts = await getCollection("posts");
+allPosts.sort((a, b) => b.data.date.localeCompare(a.data.date));
+
+function formatDate(d: string): string {
+  return new Date(d + "T00:00:00").toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
+}
+---
+
+<Base title="Posts">
+  <h1>Posts</h1>
+  <ul class="post-list">
+    {allPosts.map((p) => (
+      <li class="post-row">
+        <span class="date label">{formatDate(p.data.date)}</span>
+        <span class="post-title">
+          <a href={`/posts/${p.id}`}>{p.data.title}</a>
+          {p.data.description && <span class="desc"> — {p.data.description}</span>}
+        </span>
+      </li>
+    ))}
+  </ul>
+</Base>
+
+<style>
+  h1 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
+  }
+  .post-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .post-row {
+    display: flex;
+    gap: 1.5rem;
+    align-items: baseline;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--line);
+    flex-wrap: wrap;
+  }
+  .post-row:first-child {
+    border-top: 1px solid var(--line);
+  }
+  .date {
+    min-width: 7rem;
+    flex-shrink: 0;
+  }
+  .desc {
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+</style>

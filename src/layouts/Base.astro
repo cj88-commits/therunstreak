@@ -1,0 +1,80 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+}
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} — The Run Streak</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <header>
+      <div class="container header-inner">
+        <a href="/" class="site-name">THE RUN STREAK</a>
+        <nav>
+          <a href="/runs">Runs</a>
+          <a href="/stats">Stats</a>
+          <a href="/posts">Posts</a>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <div class="container">
+        <slot />
+      </div>
+    </main>
+    <footer>
+      <div class="container footer-inner">
+        therunstreak.run
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style>
+  header {
+    border-bottom: 1px solid var(--line);
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    z-index: 10;
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .site-name {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    font-weight: 500;
+  }
+  nav {
+    display: flex;
+    gap: 1.5rem;
+    font-size: 0.9rem;
+  }
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 2rem 0;
+  }
+  .footer-inner {
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+  main {
+    padding: 2rem 0;
+  }
+</style>

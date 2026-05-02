@@ -1,0 +1,138 @@
+---
+import Base from "./Base.astro";
+
+interface Props {
+  title: string;
+  date: string;
+  garmin_id?: string;
+  distance_km: number;
+  duration_seconds: number;
+  pace_per_km: string;
+  avg_hr?: number;
+  city?: string;
+  country?: string;
+  has_route?: boolean;
+}
+
+const {
+  title,
+  date,
+  garmin_id,
+  distance_km,
+  duration_seconds,
+  pace_per_km,
+  avg_hr,
+  city,
+  country,
+  has_route = false,
+} = Astro.props;
+
+function formatDuration(seconds: number): string {
+  const h = Math.floor(seconds / 3600);
+  const m = Math.floor((seconds % 3600) / 60);
+  const s = seconds % 60;
+  if (h > 0) {
+    return `${h}:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+  }
+  return `${m}:${String(s).padStart(2, "0")}`;
+}
+
+function formatDate(d: string): string {
+  return new Date(d + "T00:00:00").toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+}
+
+const location = [city, country].filter(Boolean).join(", ");
+---
+
+<Base title={title}>
+  <div class="run-header">
+    <p class="label">{formatDate(date)}{location ? ` · ${location}` : ""}</p>
+    <h1>{title}</h1>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat">
+      <span class="label">Distance</span>
+      <span class="metric">{distance_km.toFixed(1)} km</span>
+    </div>
+    <div class="stat">
+      <span class="label">Time</span>
+      <span class="metric">{formatDuration(duration_seconds)}</span>
+    </div>
+    <div class="stat">
+      <span class="label">Pace</span>
+      <span class="metric">{pace_per_km}/km</span>
+    </div>
+    {avg_hr && (
+      <div class="stat">
+        <span class="label">Avg HR</span>
+        <span class="metric">{avg_hr} bpm</span>
+      </div>
+    )}
+  </div>
+
+  {has_route && garmin_id && (
+    <div id="route-map" style="width:100%;height:300px;border:1px solid var(--line);margin:2rem 0"></div>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script define:vars={{ garmin_id }}>
+      import("https://unpkg.com/leaflet@1.9.4/dist/leaflet-src.esm.js").then(({ default: L }) => {
+        const map = L.map("route-map");
+        L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
+          attribution: "&copy; OpenStreetMap contributors &copy; CARTO",
+          maxZoom: 19,
+        }).addTo(map);
+        fetch(`/routes/${garmin_id}.json`)
+          .then((r) => r.json())
+          .then((coords) => {
+            const line = L.polyline(coords, { color: "#111111", weight: 2 });
+            line.addTo(map);
+            map.fitBounds(line.getBounds(), { padding: [20, 20] });
+          });
+      });
+    </script>
+  )}
+
+  <div class="run-body">
+    <slot />
+  </div>
+</Base>
+
+<style>
+  .run-header {
+    margin-bottom: 2rem;
+  }
+  .run-header h1 {
+    margin: 0.25rem 0 0;
+    font-size: 1.75rem;
+    font-weight: 500;
+  }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 1.25rem 0;
+    margin-bottom: 2rem;
+  }
+  .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  .stat .metric {
+    font-size: 1.1rem;
+  }
+  .run-body {
+    max-width: 640px;
+  }
+  @media (max-width: 480px) {
+    .stats-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>
