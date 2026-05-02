@@ -42,13 +42,6 @@
     "title": "Tower Hamlets Running"
   },
   {
-    "date": "2026-04-27",
-    "slug": "2026-04-27-easy-run",
-    "distance_km": 6.2,
-    "garmin_id": "sample001",
-    "title": "Easy Run"
-  },
-  {
     "date": "2026-04-26",
     "slug": "2026-04-26-waltham-forest-running",
     "distance_km": 2.01,
@@ -98,13 +91,6 @@
     "title": "Treadmill Running"
   },
   {
-    "date": "2026-04-20",
-    "slug": "2026-04-20-long-run",
-    "distance_km": 14.1,
-    "garmin_id": "sample002",
-    "title": "Long Run"
-  },
-  {
     "date": "2026-04-19",
     "slug": "2026-04-19-waltham-forest-running",
     "distance_km": 2.52,
@@ -152,13 +138,6 @@
     "distance_km": 2.0,
     "garmin_id": "22509711031",
     "title": "Treadmill Running"
-  },
-  {
-    "date": "2026-04-13",
-    "slug": "2026-04-13-tempo",
-    "distance_km": 8.0,
-    "garmin_id": "sample003",
-    "title": "Tempo"
   },
   {
     "date": "2026-04-12",
