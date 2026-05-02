@@ -42,23 +42,23 @@ const { title, leafletCss = false } = Astro.props;
       </div>
     </footer>
     <script>
-      if (window.netlifyIdentity) {
-        window.netlifyIdentity.on("init", user => {
-          if (!user) {
-            window.netlifyIdentity.on("login", () => {
-              document.location.href = "/admin/";
-            });
-          }
-        });
-      }
+      window.addEventListener('load', function() {
+        if (window.netlifyIdentity) {
+          window.netlifyIdentity.on("init", function(user) {
+            if (!user) {
+              window.netlifyIdentity.on("login", function() {
+                document.location.href = "/admin/";
+              });
+            }
+          });
 
-      // Handle invite and recovery tokens
-      if (window.location.hash && window.location.hash.includes('invite_token')) {
-        window.netlifyIdentity && window.netlifyIdentity.open();
-      }
-      if (window.location.hash && window.location.hash.includes('recovery_token')) {
-        window.netlifyIdentity && window.netlifyIdentity.open();
-      }
+          // Open widget if invite or recovery token present
+          var hash = window.location.hash;
+          if (hash && (hash.indexOf('invite_token') > -1 || hash.indexOf('recovery_token') > -1)) {
+            window.netlifyIdentity.open();
+          }
+        }
+      });
     </script>
   </body>
 </html>
