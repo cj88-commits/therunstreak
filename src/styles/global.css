@@ -89,3 +89,17 @@ a:hover {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   color: var(--text);
 }
+
+.streak-number {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 3.5rem;
+  font-weight: 600;
+  line-height: 1;
+  margin: 0.25rem 0 0;
+  color: var(--text);
+}
+.streak-unit {
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: var(--muted);
+}

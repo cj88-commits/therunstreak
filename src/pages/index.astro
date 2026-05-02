@@ -26,10 +26,11 @@ const prevMonth = currentMonth === 1 ? 12 : currentMonth - 1;
 const prevYM = `${prevYear}-${String(prevMonth).padStart(2, "0")}`;
 const prevMonthRuns = allRuns.filter((r) => r.data.date.startsWith(prevYM));
 
-let stats: { pb_5k: string | null; pb_10k: string | null; pb_half: string | null } = {
+let stats: { pb_5k: string | null; pb_10k: string | null; pb_half: string | null; current_streak: number } = {
   pb_5k: null,
   pb_10k: null,
   pb_half: null,
+  current_streak: 0,
 };
 
 try {
@@ -56,6 +57,11 @@ const prevGridActivities = prevMonthRuns.map((r) => ({
 ---
 
 <Base title="Home">
+  <section class="home-section streak-hero">
+    <p class="label">Current streak</p>
+    <p class="streak-number">{stats.current_streak} <span class="streak-unit">days</span></p>
+  </section>
+
   {latestRun && (
     <section class="home-section">
       <p class="label">Latest run</p>
