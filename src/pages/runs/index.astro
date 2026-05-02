@@ -6,9 +6,10 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const allRuns = await getCollection("runs");
 allRuns.sort((a, b) => b.data.date.localeCompare(a.data.date));
 
-function formatDate(d: string): string {
+function formatDay(d: string): string {
   return new Date(d + "T00:00:00").toLocaleDateString("en-GB", {
     day: "2-digit",
+    month: "short",
   });
 }
 
@@ -17,7 +18,6 @@ function monthLabel(d: string): string {
   return dt.toLocaleDateString("en-GB", { month: "long", year: "numeric" }).toUpperCase();
 }
 
-// Group by month
 const groups = new Map<string, typeof allRuns>();
 for (const run of allRuns) {
   const key = run.data.date.slice(0, 7);
@@ -29,72 +29,101 @@ const sortedKeys = [...groups.keys()].sort((a, b) => b.localeCompare(a));
 ---
 
 <Base title="Runs">
-  <h1>Runs</h1>
   {sortedKeys.map((key) => {
     const runs = groups.get(key)!;
     const label = monthLabel(runs[0].data.date);
     return (
       <section class="month-section">
-        <p class="label">{label}</p>
-        <ul class="run-list">
-          {runs.map((r) => (
-            <li class="run-row">
-              <span class="metric day">{formatDate(r.data.date)}</span>
-              <span class="metric dist">{r.data.distance_km.toFixed(1)} km</span>
-              <span class="metric pace">{r.data.pace_per_km}/km</span>
-              {r.data.city && <span class="city">{r.data.city}</span>}
-              <a href={`${base}/runs/${r.id}`}>{r.data.title}</a>
-            </li>
-          ))}
-        </ul>
+        <p class="month-heading">{label}</p>
+        {runs.map((r) => (
+          <a href={`${base}/runs/${r.id}`} class="run-entry">
+            <div class="run-top">
+              <span class="run-title">{r.data.title}</span>
+              <span class="run-date">{formatDay(r.data.date)}</span>
+            </div>
+            <div class="run-stats">
+              <span>
+                <span class="stat-label">Dist</span>
+                <span class="metric">{r.data.distance_km.toFixed(1)} km</span>
+              </span>
+              <span>
+                <span class="stat-label">Pace</span>
+                <span class="metric">{r.data.pace_per_km}/km</span>
+              </span>
+              {r.data.city && (
+                <span>
+                  <span class="stat-label">City</span>
+                  <span class="metric">{r.data.city}</span>
+                </span>
+              )}
+            </div>
+          </a>
+        ))}
       </section>
     );
   })}
 </Base>
 
 <style>
-  h1 {
-    font-size: 1.5rem;
-    font-weight: 500;
-    margin-bottom: 2rem;
-  }
   .month-section {
-    margin-bottom: 2.5rem;
-  }
-  .month-section .label {
-    display: block;
     margin-bottom: 0.5rem;
   }
-  .run-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  .run-row {
-    display: flex;
-    gap: 1rem;
-    align-items: baseline;
-    padding: 0.4rem 0;
+  .month-heading {
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 1.5rem 0 0.5rem;
     border-bottom: 1px solid var(--line);
-    font-size: 0.9rem;
+    margin: 0;
+  }
+  .run-entry {
+    display: block;
+    border-bottom: 1px solid var(--line);
+    padding: 0.875rem 0;
+    text-decoration: none;
+    color: inherit;
+  }
+  .run-entry:hover {
+    background: var(--soft);
+  }
+  .run-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.4rem;
+  }
+  .run-title {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text);
+  }
+  .run-date {
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    flex-shrink: 0;
+    margin-left: 1rem;
+  }
+  .run-stats {
+    display: flex;
+    gap: 1.5rem;
     flex-wrap: wrap;
   }
-  .run-row:first-child {
-    border-top: 1px solid var(--line);
+  .run-stats > span {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
   }
-  .day {
-    color: var(--muted);
-    min-width: 1.5rem;
-  }
-  .dist {
-    min-width: 5rem;
-  }
-  .pace {
-    min-width: 5rem;
+  .stat-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     color: var(--muted);
   }
-  .city {
-    color: var(--muted);
-    min-width: 5rem;
+  .run-stats .metric {
+    font-size: 0.85rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    color: var(--text);
   }
 </style>
