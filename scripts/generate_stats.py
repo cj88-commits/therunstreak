@@ -72,22 +72,28 @@ def compute_streaks(run_dates: list[date]) -> tuple[int, int]:
     if not run_dates:
         return 0, 0
 
-    day_set = set(run_dates)
+    sorted_days = sorted(set(run_dates), reverse=True)
+    most_recent = sorted_days[0]
     today = date.today()
 
-    # Current streak — walk backwards from today
-    current = 0
-    cursor = today
-    while cursor in day_set:
-        current += 1
-        cursor -= timedelta(days=1)
+    # Current streak — start from most recent run, not today
+    # Streak is live if most recent run was today or yesterday
+    if most_recent < today - timedelta(days=1):
+        current = 0
+    else:
+        current = 1
+        for i in range(1, len(sorted_days)):
+            if sorted_days[i] == sorted_days[i - 1] - timedelta(days=1):
+                current += 1
+            else:
+                break
 
-    # Longest streak — iterate sorted unique days
-    sorted_days = sorted(day_set)
+    # Longest streak — iterate sorted unique days ascending
+    asc_days = sorted_days[::-1]
     longest = 1
     run = 1
-    for i in range(1, len(sorted_days)):
-        if (sorted_days[i] - sorted_days[i - 1]).days == 1:
+    for i in range(1, len(asc_days)):
+        if (asc_days[i] - asc_days[i - 1]).days == 1:
             run += 1
             longest = max(longest, run)
         else:
