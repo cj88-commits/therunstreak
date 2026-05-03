@@ -3,6 +3,16 @@ import Base from "../layouts/Base.astro";
 import { readFileSync } from "node:fs";
 import path from "node:path";
 
+interface DistBucket {
+  label: string;
+  count: number;
+}
+
+interface SurfaceSplit {
+  treadmill: number;
+  outdoor: number;
+}
+
 interface Stats {
   total_runs: number;
   total_km: number;
@@ -15,6 +25,8 @@ interface Stats {
   cities: string[];
   current_streak: number;
   longest_streak: number;
+  distance_distribution: DistBucket[];
+  surface_split: SurfaceSplit;
   last_updated: string | null;
 }
 
@@ -40,6 +52,8 @@ const defaultStats: Stats = {
   cities: [],
   current_streak: 0,
   longest_streak: 0,
+  distance_distribution: [],
+  surface_split: { treadmill: 0, outdoor: 0 },
   last_updated: null,
 };
 
@@ -60,6 +74,46 @@ try {
 } catch {
   // no monthly data
 }
+
+// Bar chart
+const distDist: DistBucket[] = stats.distance_distribution ?? [];
+const BAR_X = 80;
+const BAR_MAX_W = 320;
+const ROW_H = 28;
+const ROW_GAP = 6;
+const barChartH = distDist.length > 0
+  ? distDist.length * ROW_H + (distDist.length - 1) * ROW_GAP
+  : 0;
+const maxCount = Math.max(...distDist.map((b) => b.count), 1);
+
+// Donut chart
+function polarToCartesian(cx: number, cy: number, r: number, angleDeg: number) {
+  const rad = ((angleDeg - 90) * Math.PI) / 180;
+  return { x: cx + r * Math.cos(rad), y: cy + r * Math.sin(rad) };
+}
+
+function donutSlice(
+  cx: number, cy: number, outerR: number, innerR: number,
+  startDeg: number, endDeg: number,
+): string {
+  const o1 = polarToCartesian(cx, cy, outerR, startDeg);
+  const o2 = polarToCartesian(cx, cy, outerR, endDeg);
+  const i1 = polarToCartesian(cx, cy, innerR, endDeg);
+  const i2 = polarToCartesian(cx, cy, innerR, startDeg);
+  const large = endDeg - startDeg > 180 ? 1 : 0;
+  return `M ${o1.x.toFixed(2)} ${o1.y.toFixed(2)} A ${outerR} ${outerR} 0 ${large} 1 ${o2.x.toFixed(2)} ${o2.y.toFixed(2)} L ${i1.x.toFixed(2)} ${i1.y.toFixed(2)} A ${innerR} ${innerR} 0 ${large} 0 ${i2.x.toFixed(2)} ${i2.y.toFixed(2)} Z`;
+}
+
+const surface: SurfaceSplit = stats.surface_split ?? { treadmill: 0, outdoor: 0 };
+const totalSurface = surface.treadmill + surface.outdoor;
+const treadmillPct = totalSurface > 0 ? Math.round((surface.treadmill / totalSurface) * 100) : 0;
+const treadmillDeg = totalSurface > 0 ? (surface.treadmill / totalSurface) * 360 : 0;
+const treadmillPath = treadmillDeg > 0 && treadmillDeg < 360
+  ? donutSlice(100, 100, 80, 52, 0, treadmillDeg)
+  : "";
+const outdoorPath = treadmillDeg > 0 && treadmillDeg < 360
+  ? donutSlice(100, 100, 80, 52, treadmillDeg, 360)
+  : "";
 ---
 
 <Base title="Stats">
@@ -132,6 +186,82 @@ try {
     <section class="section">
       <p class="label">Cities</p>
       <p>{stats.cities.join(" · ")}</p>
+    </section>
+  )}
+
+  {distDist.length > 0 && (
+    <section class="section">
+      <p class="label">Breakdowns</p>
+      <div class="charts-grid">
+        <div>
+          <svg
+            viewBox={`0 0 440 ${barChartH}`}
+            style="width:100%;height:auto;display:block;"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            {distDist.map((b, i) => {
+              const rowTop = i * (ROW_H + ROW_GAP);
+              const textY = rowTop + 19;
+              const barY = rowTop + 5;
+              const barW = BAR_MAX_W * (b.count / maxCount);
+              return (
+                <g>
+                  <text
+                    x="70"
+                    y={textY}
+                    text-anchor="end"
+                    font-family="monospace"
+                    font-size="12"
+                    style="fill: var(--muted);"
+                  >{b.label}</text>
+                  {b.count > 0 && (
+                    <rect x={BAR_X} y={barY} width={barW} height="18" fill="#111111" />
+                  )}
+                  <text
+                    x="408"
+                    y={textY}
+                    text-anchor="end"
+                    font-family="monospace"
+                    font-size="12"
+                    style="fill: var(--muted);"
+                  >{b.count}</text>
+                </g>
+              );
+            })}
+          </svg>
+        </div>
+        <div class="donut-wrap">
+          <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            {treadmillDeg === 0 && <circle cx="100" cy="100" r="80" fill="#e5e5e5" />}
+            {treadmillDeg >= 360 && <circle cx="100" cy="100" r="80" fill="#111111" />}
+            {outdoorPath && <path d={outdoorPath} fill="#e5e5e5" />}
+            {treadmillPath && <path d={treadmillPath} fill="#111111" />}
+            <circle cx="100" cy="100" r="52" style="fill: var(--bg);" />
+            <text
+              x="100"
+              y="97"
+              text-anchor="middle"
+              dominant-baseline="middle"
+              font-family="monospace"
+              font-size="22"
+              font-weight="bold"
+              fill="#111111"
+            >{treadmillPct}%</text>
+            <text
+              x="100"
+              y="115"
+              text-anchor="middle"
+              font-family="monospace"
+              font-size="11"
+              style="fill: var(--muted);"
+            >treadmill</text>
+          </svg>
+          <div class="donut-legend">
+            <span class="label">outdoor — {surface.outdoor}</span>
+            <span class="label">treadmill — {surface.treadmill}</span>
+          </div>
+        </div>
+      </div>
     </section>
   )}
 
@@ -210,5 +340,26 @@ try {
   td {
     padding: 0.5rem 1rem 0.5rem 0;
     border-bottom: 1px solid var(--line);
+  }
+  .charts-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+  @media (max-width: 600px) {
+    .charts-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  .donut-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .donut-legend {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 0.75rem;
   }
 </style>

@@ -170,6 +170,33 @@ current_streak, longest_streak = compute_streaks(run_dates)
 earliest = min(r["date"] for r in runs) if runs else None
 latest = max(r["date"] for r in runs) if runs else None
 
+# Distance distribution
+DIST_BUCKETS = [
+    ("1-3 km",   lambda d: d < 3),
+    ("3-5 km",   lambda d: 3 <= d < 5),
+    ("5-8 km",   lambda d: 5 <= d < 8),
+    ("8-12 km",  lambda d: 8 <= d < 12),
+    ("12-17 km", lambda d: 12 <= d < 17),
+    ("17-25 km", lambda d: 17 <= d < 25),
+    ("25+ km",   lambda d: d >= 25),
+]
+distance_distribution = [
+    {"label": label, "count": sum(1 for r in runs if fn(r["distance_km"]))}
+    for label, fn in DIST_BUCKETS
+]
+
+# Surface split
+def is_treadmill(r: dict) -> bool:
+    if "treadmill" in r["title"].lower():
+        return True
+    if not r["city"] and not r["has_route"]:
+        return True
+    return False
+
+treadmill_count = sum(1 for r in runs if is_treadmill(r))
+outdoor_count = total_runs - treadmill_count
+surface_split = {"treadmill": treadmill_count, "outdoor": outdoor_count}
+
 stats = {
     "total_runs": total_runs,
     "total_km": total_km,
@@ -182,6 +209,8 @@ stats = {
     "cities": cities,
     "current_streak": current_streak,
     "longest_streak": longest_streak,
+    "distance_distribution": distance_distribution,
+    "surface_split": surface_split,
     "last_updated": date.today().isoformat(),
 }
 
