@@ -1,5 +1,12 @@
 [
   {
+    "date": "2026-05-05",
+    "slug": "2026-05-05-treadmill-running",
+    "distance_km": 2.0,
+    "garmin_id": "22771623652",
+    "title": "Treadmill Running"
+  },
+  {
     "date": "2026-05-04",
     "slug": "2026-05-04-waltham-forest-running",
     "distance_km": 5.58,
