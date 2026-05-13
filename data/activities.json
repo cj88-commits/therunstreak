@@ -1,5 +1,12 @@
 [
   {
+    "date": "2026-05-13",
+    "slug": "2026-05-13-treadmill-running",
+    "distance_km": 2.0,
+    "garmin_id": "22865594866",
+    "title": "Treadmill Running"
+  },
+  {
     "date": "2026-05-12",
     "slug": "2026-05-12-tower-hamlets-running",
     "distance_km": 7.21,
