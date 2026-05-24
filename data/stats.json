@@ -1,6 +1,6 @@
 {
-  "total_runs": 729,
-  "total_km": 2694.8,
+  "total_runs": 730,
+  "total_km": 2699.3,
   "longest_run_km": 24.01,
   "avg_pace": "6:28",
   "pb_5k": "23:49",
@@ -19,6 +19,7 @@
     "Adeje",
     "Apalit",
     "Bowral",
+    "Canterbury",
     "Central Bedfordshire",
     "Elmbridge",
     "Fort Bonifacio",
@@ -38,8 +39,8 @@
     "Wycombe",
     "Zurich"
   ],
-  "current_streak": 714,
-  "longest_streak": 714,
+  "current_streak": 715,
+  "longest_streak": 715,
   "distance_distribution": [
     {
       "label": "1-3 km",
@@ -47,7 +48,7 @@
     },
     {
       "label": "3-5 km",
-      "count": 144
+      "count": 145
     },
     {
       "label": "5-8 km",
@@ -72,7 +73,7 @@
   ],
   "surface_split": {
     "treadmill": 105,
-    "outdoor": 624
+    "outdoor": 625
   },
   "last_updated": "2026-05-24"
 }
