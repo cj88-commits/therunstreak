@@ -7,7 +7,7 @@ date: '2025-01-31'
 distance_km: 2.37
 duration_seconds: 920
 garmin_id: '18150208156'
-has_route: true
+has_route: false
 pace_per_km: '6:28'
 tags: []
 title: Tower Hamlets Running
