@@ -1,6 +1,6 @@
 {
-  "total_runs": 763,
-  "total_km": 2831.8,
+  "total_runs": 764,
+  "total_km": 2835.0,
   "longest_run_km": 24.01,
   "avg_pace": "6:28",
   "pb_5k": "23:49",
@@ -40,8 +40,8 @@
     "Wycombe",
     "Zurich"
   ],
-  "current_streak": 748,
-  "longest_streak": 748,
+  "current_streak": 749,
+  "longest_streak": 749,
   "distance_distribution": [
     {
       "label": "1-3 km",
@@ -49,7 +49,7 @@
     },
     {
       "label": "3-5 km",
-      "count": 151
+      "count": 152
     },
     {
       "label": "5-8 km",
@@ -74,7 +74,7 @@
   ],
   "surface_split": {
     "treadmill": 119,
-    "outdoor": 644
+    "outdoor": 645
   },
   "last_updated": "2026-06-27"
 }
