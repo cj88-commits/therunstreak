@@ -1,6 +1,6 @@
 {
-  "total_runs": 781,
-  "total_km": 2893.1,
+  "total_runs": 782,
+  "total_km": 2897.3,
   "longest_run_km": 24.01,
   "avg_pace": "6:28",
   "pb_5k": "23:49",
@@ -49,7 +49,7 @@
     },
     {
       "label": "3-5 km",
-      "count": 155
+      "count": 156
     },
     {
       "label": "5-8 km",
@@ -74,7 +74,7 @@
   ],
   "surface_split": {
     "treadmill": 126,
-    "outdoor": 655
+    "outdoor": 656
   },
   "last_updated": "2026-07-14"
 }
