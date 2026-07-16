@@ -15,16 +15,16 @@
   },
   {
     "date": "2026-07-14",
-    "slug": "2026-07-14-waltham-forest-running",
-    "distance_km": 5.21,
-    "garmin_id": "23591052571",
+    "slug": "2026-07-14-waltham-forest-running-2",
+    "distance_km": 4.2,
+    "garmin_id": "23593506697",
     "title": "Waltham Forest Running"
   },
   {
     "date": "2026-07-14",
-    "slug": "2026-07-14-waltham-forest-running-2",
-    "distance_km": 4.2,
-    "garmin_id": "23593506697",
+    "slug": "2026-07-14-waltham-forest-running",
+    "distance_km": 5.21,
+    "garmin_id": "23591052571",
     "title": "Waltham Forest Running"
   },
   {
@@ -1436,16 +1436,16 @@
   },
   {
     "date": "2025-12-24",
-    "slug": "2025-12-24-upplands-bro-running",
-    "distance_km": 0.61,
-    "garmin_id": "21337880300",
+    "slug": "2025-12-24-upplands-bro-running-2",
+    "distance_km": 7.84,
+    "garmin_id": "21337879955",
     "title": "Upplands-Bro Running"
   },
   {
     "date": "2025-12-24",
-    "slug": "2025-12-24-upplands-bro-running-2",
-    "distance_km": 7.84,
-    "garmin_id": "21337879955",
+    "slug": "2025-12-24-upplands-bro-running",
+    "distance_km": 0.61,
+    "garmin_id": "21337880300",
     "title": "Upplands-Bro Running"
   },
   {
@@ -3123,16 +3123,16 @@
   },
   {
     "date": "2025-05-01",
-    "slug": "2025-05-01-sydney-running",
-    "distance_km": 1.32,
-    "garmin_id": "18985977568",
+    "slug": "2025-05-01-sydney-running-2",
+    "distance_km": 1.35,
+    "garmin_id": "18985977323",
     "title": "Sydney Running"
   },
   {
     "date": "2025-05-01",
-    "slug": "2025-05-01-sydney-running-2",
-    "distance_km": 1.35,
-    "garmin_id": "18985977323",
+    "slug": "2025-05-01-sydney-running",
+    "distance_km": 1.32,
+    "garmin_id": "18985977568",
     "title": "Sydney Running"
   },
   {
@@ -3942,17 +3942,17 @@
   },
   {
     "date": "2025-01-07",
-    "slug": "2025-01-07-waltham-forest-running",
-    "distance_km": 0.51,
-    "garmin_id": "17941110096",
-    "title": "Waltham Forest Running"
-  },
-  {
-    "date": "2025-01-07",
     "slug": "2025-01-07-central-bedfordshire-running",
     "distance_km": 2.01,
     "garmin_id": "17940372304",
     "title": "Central Bedfordshire Running"
+  },
+  {
+    "date": "2025-01-07",
+    "slug": "2025-01-07-waltham-forest-running",
+    "distance_km": 0.51,
+    "garmin_id": "17941110096",
+    "title": "Waltham Forest Running"
   },
   {
     "date": "2025-01-06",
@@ -4894,17 +4894,17 @@
   },
   {
     "date": "2024-08-26",
-    "slug": "2024-08-26-haringey-running",
-    "distance_km": 1.45,
-    "garmin_id": "16864981364",
-    "title": "Haringey Running"
-  },
-  {
-    "date": "2024-08-26",
     "slug": "2024-08-26-waltham-forest-running",
     "distance_km": 1.61,
     "garmin_id": "16864842957",
     "title": "Waltham Forest Running"
+  },
+  {
+    "date": "2024-08-26",
+    "slug": "2024-08-26-haringey-running",
+    "distance_km": 1.45,
+    "garmin_id": "16864981364",
+    "title": "Haringey Running"
   },
   {
     "date": "2024-08-25",
@@ -4978,16 +4978,16 @@
   },
   {
     "date": "2024-08-15",
-    "slug": "2024-08-15-waltham-forest-running-2",
-    "distance_km": 2.01,
-    "garmin_id": "16771489686",
+    "slug": "2024-08-15-waltham-forest-running",
+    "distance_km": 0.62,
+    "garmin_id": "16771783388",
     "title": "Waltham Forest Running"
   },
   {
     "date": "2024-08-15",
-    "slug": "2024-08-15-waltham-forest-running",
-    "distance_km": 0.62,
-    "garmin_id": "16771783388",
+    "slug": "2024-08-15-waltham-forest-running-2",
+    "distance_km": 2.01,
+    "garmin_id": "16771489686",
     "title": "Waltham Forest Running"
   },
   {
@@ -5090,16 +5090,16 @@
   },
   {
     "date": "2024-07-31",
-    "slug": "2024-07-31-gotland-running",
-    "distance_km": 1.67,
-    "garmin_id": "16638138917",
+    "slug": "2024-07-31-gotland-running-2",
+    "distance_km": 5.01,
+    "garmin_id": "16638137726",
     "title": "Gotland Running"
   },
   {
     "date": "2024-07-31",
-    "slug": "2024-07-31-gotland-running-2",
-    "distance_km": 5.01,
-    "garmin_id": "16638137726",
+    "slug": "2024-07-31-gotland-running",
+    "distance_km": 1.67,
+    "garmin_id": "16638138917",
     "title": "Gotland Running"
   },
   {
@@ -5132,16 +5132,16 @@
   },
   {
     "date": "2024-07-28",
-    "slug": "2024-07-28-gotland-running",
-    "distance_km": 1.47,
-    "garmin_id": "16613355184",
+    "slug": "2024-07-28-gotland-running-2",
+    "distance_km": 1.63,
+    "garmin_id": "16613215000",
     "title": "Gotland Running"
   },
   {
     "date": "2024-07-28",
-    "slug": "2024-07-28-gotland-running-2",
-    "distance_km": 1.63,
-    "garmin_id": "16613215000",
+    "slug": "2024-07-28-gotland-running",
+    "distance_km": 1.47,
+    "garmin_id": "16613355184",
     "title": "Gotland Running"
   },
   {
