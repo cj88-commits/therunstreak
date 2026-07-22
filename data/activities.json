@@ -1478,16 +1478,16 @@
   },
   {
     "date": "2025-12-24",
-    "slug": "2025-12-24-upplands-bro-running",
-    "distance_km": 0.61,
-    "garmin_id": "21337880300",
+    "slug": "2025-12-24-upplands-bro-running-2",
+    "distance_km": 7.84,
+    "garmin_id": "21337879955",
     "title": "Upplands-Bro Running"
   },
   {
     "date": "2025-12-24",
-    "slug": "2025-12-24-upplands-bro-running-2",
-    "distance_km": 7.84,
-    "garmin_id": "21337879955",
+    "slug": "2025-12-24-upplands-bro-running",
+    "distance_km": 0.61,
+    "garmin_id": "21337880300",
     "title": "Upplands-Bro Running"
   },
   {
@@ -2486,16 +2486,16 @@
   },
   {
     "date": "2025-08-05",
-    "slug": "2025-08-05-gotland-running",
-    "distance_km": 2.01,
-    "garmin_id": "19962640201",
+    "slug": "2025-08-05-gotland-running-2",
+    "distance_km": 4.79,
+    "garmin_id": "19957306740",
     "title": "Gotland Running"
   },
   {
     "date": "2025-08-05",
-    "slug": "2025-08-05-gotland-running-2",
-    "distance_km": 4.79,
-    "garmin_id": "19957306740",
+    "slug": "2025-08-05-gotland-running",
+    "distance_km": 2.01,
+    "garmin_id": "19962640201",
     "title": "Gotland Running"
   },
   {
@@ -3970,16 +3970,16 @@
   },
   {
     "date": "2025-01-08",
-    "slug": "2025-01-08-tower-hamlets-running-2",
-    "distance_km": 2.05,
-    "garmin_id": "17947476078",
+    "slug": "2025-01-08-tower-hamlets-running",
+    "distance_km": 1.21,
+    "garmin_id": "17947476395",
     "title": "Tower Hamlets Running"
   },
   {
     "date": "2025-01-08",
-    "slug": "2025-01-08-tower-hamlets-running",
-    "distance_km": 1.21,
-    "garmin_id": "17947476395",
+    "slug": "2025-01-08-tower-hamlets-running-2",
+    "distance_km": 2.05,
+    "garmin_id": "17947476078",
     "title": "Tower Hamlets Running"
   },
   {
@@ -3998,17 +3998,17 @@
   },
   {
     "date": "2025-01-06",
-    "slug": "2025-01-06-central-bedfordshire-running",
-    "distance_km": 1.71,
-    "garmin_id": "17931729744",
-    "title": "Central Bedfordshire Running"
-  },
-  {
-    "date": "2025-01-06",
     "slug": "2025-01-06-waltham-forest-running",
     "distance_km": 0.85,
     "garmin_id": "17932373425",
     "title": "Waltham Forest Running"
+  },
+  {
+    "date": "2025-01-06",
+    "slug": "2025-01-06-central-bedfordshire-running",
+    "distance_km": 1.71,
+    "garmin_id": "17931729744",
+    "title": "Central Bedfordshire Running"
   },
   {
     "date": "2025-01-05",
@@ -5132,16 +5132,16 @@
   },
   {
     "date": "2024-07-31",
-    "slug": "2024-07-31-gotland-running",
-    "distance_km": 1.67,
-    "garmin_id": "16638138917",
+    "slug": "2024-07-31-gotland-running-2",
+    "distance_km": 5.01,
+    "garmin_id": "16638137726",
     "title": "Gotland Running"
   },
   {
     "date": "2024-07-31",
-    "slug": "2024-07-31-gotland-running-2",
-    "distance_km": 5.01,
-    "garmin_id": "16638137726",
+    "slug": "2024-07-31-gotland-running",
+    "distance_km": 1.67,
+    "garmin_id": "16638138917",
     "title": "Gotland Running"
   },
   {
@@ -5174,16 +5174,16 @@
   },
   {
     "date": "2024-07-28",
-    "slug": "2024-07-28-gotland-running",
-    "distance_km": 1.47,
-    "garmin_id": "16613355184",
+    "slug": "2024-07-28-gotland-running-2",
+    "distance_km": 1.63,
+    "garmin_id": "16613215000",
     "title": "Gotland Running"
   },
   {
     "date": "2024-07-28",
-    "slug": "2024-07-28-gotland-running-2",
-    "distance_km": 1.63,
-    "garmin_id": "16613215000",
+    "slug": "2024-07-28-gotland-running",
+    "distance_km": 1.47,
+    "garmin_id": "16613355184",
     "title": "Gotland Running"
   },
   {
