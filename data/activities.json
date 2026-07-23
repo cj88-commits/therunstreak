@@ -1,5 +1,19 @@
 [
   {
+    "date": "2026-07-23",
+    "slug": "2026-07-23-mafra-running-2",
+    "distance_km": 2.05,
+    "garmin_id": "23702888360",
+    "title": "Mafra Running"
+  },
+  {
+    "date": "2026-07-23",
+    "slug": "2026-07-23-mafra-running",
+    "distance_km": 2.02,
+    "garmin_id": "23702889014",
+    "title": "Mafra Running"
+  },
+  {
     "date": "2026-07-22",
     "slug": "2026-07-22-treadmill-running",
     "distance_km": 1.99,
