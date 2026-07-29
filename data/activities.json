@@ -8,6 +8,20 @@
   },
   {
     "date": "2026-07-29",
+    "slug": "2026-07-29-gotland-running-6",
+    "distance_km": 3.51,
+    "garmin_id": "23781560271",
+    "title": "Gotland Running"
+  },
+  {
+    "date": "2026-07-29",
+    "slug": "2026-07-29-gotland-running-7",
+    "distance_km": 3.51,
+    "garmin_id": "23781150278",
+    "title": "Gotland Running"
+  },
+  {
+    "date": "2026-07-29",
     "slug": "2026-07-29-gotland-running",
     "distance_km": 2.02,
     "garmin_id": "23773425660",
