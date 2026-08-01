@@ -1,6 +1,15 @@
 [
   {
     "year": 2026,
+    "month": 8,
+    "month_label": "August 2026",
+    "runs": 1,
+    "distance_km": 4.0,
+    "duration_seconds": 1463,
+    "duration_formatted": "24m"
+  },
+  {
+    "year": 2026,
     "month": 7,
     "month_label": "July 2026",
     "runs": 45,
