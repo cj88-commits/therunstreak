@@ -7,7 +7,7 @@ date: '2024-08-05'
 distance_km: 1.67
 duration_seconds: 761
 garmin_id: '16678398391'
-has_route: true
+has_route: false
 pace_per_km: '7:35'
 tags: []
 title: Portimão Running
