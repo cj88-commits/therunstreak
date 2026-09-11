@@ -1,16 +1,16 @@
 ---
-title: "Treadmill Running"
-date: "2026-09-11"
-garmin_id: "24319713932"
-distance_km: 2.0
-duration_seconds: 815
-pace_per_km: "6:47"
+auto_generated: true
 avg_hr: 132
 city: null
 country: null
+date: '2026-09-11'
+distance_km: 2.0
+duration_seconds: 815
+garmin_id: '24319713932'
 has_route: false
-auto_generated: true
+pace_per_km: '6:47'
 tags: []
+title: Treadmill Running
 ---
 
 ## Notes
