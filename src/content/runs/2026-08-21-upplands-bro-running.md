@@ -7,7 +7,7 @@ date: '2026-08-21'
 distance_km: 5.01
 duration_seconds: 1865
 garmin_id: '24061850557'
-has_route: false
+has_route: true
 pace_per_km: '6:12'
 tags: []
 title: Upplands-Bro Running

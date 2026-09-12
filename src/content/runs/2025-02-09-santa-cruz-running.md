@@ -7,7 +7,7 @@ date: '2025-02-09'
 distance_km: 1.96
 duration_seconds: 1063
 garmin_id: '18231939911'
-has_route: false
+has_route: true
 pace_per_km: '9:02'
 tags: []
 title: Santa Cruz Running
