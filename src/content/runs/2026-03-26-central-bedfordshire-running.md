@@ -7,7 +7,7 @@ date: '2026-03-26'
 distance_km: 5.01
 duration_seconds: 1869
 garmin_id: '22305508206'
-has_route: false
+has_route: true
 pace_per_km: '6:13'
 tags: []
 title: Central Bedfordshire Running
