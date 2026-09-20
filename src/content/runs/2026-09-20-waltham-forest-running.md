@@ -1,14 +1,14 @@
 ---
 auto_generated: true
-avg_hr: 143
+avg_hr: 133
 city: Waltham Forest
 country: United Kingdom
-date: '2025-06-28'
-distance_km: 4.01
-duration_seconds: 1481
-garmin_id: '19572564948'
-has_route: false
-pace_per_km: '6:09'
+date: '2026-09-20'
+distance_km: 5.63
+duration_seconds: 2272
+garmin_id: '24428091884'
+has_route: true
+pace_per_km: '6:43'
 tags: []
 title: Waltham Forest Running
 ---
