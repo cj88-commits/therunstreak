@@ -7,7 +7,7 @@ date: '2026-06-13'
 distance_km: 5.06
 duration_seconds: 1668
 garmin_id: '23231116150'
-has_route: true
+has_route: false
 pace_per_km: '5:29'
 tags: []
 title: Enfield Running
