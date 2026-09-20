@@ -7,7 +7,7 @@ date: '2025-12-06'
 distance_km: 5.1
 duration_seconds: 1870
 garmin_id: '21182305826'
-has_route: true
+has_route: false
 pace_per_km: '6:06'
 tags: []
 title: Waltham Forest Running
