@@ -94,9 +94,9 @@ const showMap = has_route && !!garmin_id;
             }
             var map = L.map("route-map");
             L.tileLayer(
-              "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+              "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
               {
-                attribution: "&copy; OpenStreetMap contributors &copy; CARTO",
+                attribution: "&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors",
                 maxZoom: 19,
               }
             ).addTo(map);
@@ -117,6 +117,9 @@ const showMap = has_route && !!garmin_id;
 </Base>
 
 <style>
+  #route-map :global(.leaflet-tile-pane) {
+    filter: grayscale(1) contrast(0.9) brightness(1.08);
+  }
   .run-header {
     margin-bottom: 2rem;
   }
