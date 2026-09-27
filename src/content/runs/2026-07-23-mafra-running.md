@@ -7,7 +7,7 @@ date: '2026-07-23'
 distance_km: 2.02
 duration_seconds: 806
 garmin_id: '23702889014'
-has_route: true
+has_route: false
 pace_per_km: '6:39'
 tags: []
 title: Mafra Running

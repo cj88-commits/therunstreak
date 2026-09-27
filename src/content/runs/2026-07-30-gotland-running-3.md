@@ -7,7 +7,7 @@ date: '2026-07-30'
 distance_km: 3.5
 duration_seconds: 1442
 garmin_id: '23782753916'
-has_route: true
+has_route: false
 pace_per_km: '6:52'
 tags: []
 title: Gotland Running
