@@ -7,7 +7,7 @@ date: '2025-08-30'
 distance_km: 21.4
 duration_seconds: 7776
 garmin_id: '20227398151'
-has_route: false
+has_route: true
 pace_per_km: '6:03'
 tags: []
 title: Stockholm Running
