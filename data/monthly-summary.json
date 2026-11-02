@@ -3,10 +3,10 @@
     "year": 2026,
     "month": 11,
     "month_label": "November 2026",
-    "runs": 1,
-    "distance_km": 8.0,
-    "duration_seconds": 3025,
-    "duration_formatted": "50m"
+    "runs": 2,
+    "distance_km": 10.0,
+    "duration_seconds": 3849,
+    "duration_formatted": "1h 4m"
   },
   {
     "year": 2026,
